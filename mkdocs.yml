@@ -64,4 +64,5 @@ watch:
 
 nav:
     - Home: index.md
+    - Tasks: tasks.md
 
