@@ -1,0 +1,20 @@
+{
+  "template": "https://github.com/PrefectHQ/prefect-collection-template",
+  "commit": "3391329444b9e6de946a77318e6e56cd8f49a23f",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "full_name": "Gary Ranson",
+      "email": "garyranson@hotmail.com",
+      "github_organization": "peracto",
+      "collection_name": "prefect-filesystem",
+      "collection_slug": "prefect_filesystem",
+      "collection_short_description": "Collection of Prefect tasks to simplfy FifleSystem actions",
+      "_copy_without_render": [
+        ".github/workflows/*.yml"
+      ],
+      "_template": "https://github.com/PrefectHQ/prefect-collection-template"
+    }
+  },
+  "directory": null
+}
