@@ -1,3 +1,7 @@
+"""
+Utility functions
+"""
+
 import sys
 from collections import namedtuple
 from inspect import isawaitable
