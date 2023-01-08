@@ -3,6 +3,7 @@ Abstract Local Filesystem
 """
 
 from contextlib import contextmanager
+from os.path import join
 from tempfile import TemporaryDirectory
 
 from fsspec import AbstractFileSystem
@@ -34,21 +35,24 @@ class AbstractLocalFileSystem(AbstractBlock, BaseModel):
         description="Automatically make directories if set",
     )
 
-    @property
-    def basepath(self) -> str:
+    def _resolve_abstract_filesystem(self) -> AbstractFileSystem:
         """
-
-        :return:
+        Resolves the provided filesystem into an AbstractFileSystem
+        :return: AbstractFileSystem
         """
-        return f"file://{self.root_path}"
-
-    @property
-    def filesystem(self) -> AbstractFileSystem:
         """
-
-        :return:
+        Resolves the provided filesystem into an AbstractFileSystem
+        :return: AbstractFileSystem
         """
         return FsSpecLocalFileSystem(auto_mkdir=self.auto_mkdir)
+
+    def build_path(self, path: str) -> str:
+        """
+        Joins path to the basepath trimming any trailing '/'
+        :param path:
+        :return:
+        """
+        return join(f"file://{self.root_path}", path.lstrip("/"))
 
     @classmethod
     @contextmanager
