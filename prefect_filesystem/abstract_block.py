@@ -15,16 +15,7 @@ from prefect.utilities.asyncutils import run_sync_in_worker_thread
 from prefect_filesystem.compression import compr
 
 
-class BlockType:
-    """
-    Type definition
-    """
-
-    basepath: str
-    filesystem: any
-
-
-class AbstractBlock(BlockType):
+class AbstractBlock:
     """
     Base methods for the Abstract Block
     """
@@ -38,7 +29,10 @@ class AbstractBlock(BlockType):
         Resolves the provided filesystem into an AbstractFileSystem
         :return: AbstractFileSystem
         """
-        return _resolve_abstract_filesystem(self.filesystem)
+        if hasattr(self, "filesystem"):
+            return _resolve_abstract_filesystem(self.filesystem)
+
+        raise NotImplementedError()
 
     def build_path(self, path: str) -> str:
         """
@@ -46,7 +40,9 @@ class AbstractBlock(BlockType):
         :param path:
         :return:
         """
-        return os.path.join(self.basepath, path.lstrip("/"))
+        if hasattr(self, "basepath"):
+            return os.path.join(self.basepath, path.lstrip("/"))
+        raise NotImplementedError()
 
     def open(
         self, filepath: str, mode: str = "rb", compression=None, **kwargs

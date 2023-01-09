@@ -20,9 +20,7 @@ class AbstractWrapper(AbstractBlock):
         Wrapped pass through
         :return:
         """
-        if self._fs is None:
-            self._fs = self.block.filesystem
-        return self._fs
+        return self.block.filesystem
 
     @property
     def basepath(self):

@@ -11,10 +11,8 @@ from prefect.filesystems import (
 from prefect.utilities.asyncutils import sync_compatible
 from pydantic import Field, SecretStr
 
-from prefect_filesystem.abstract_block import AbstractBlock
 
-
-class Sftp(WritableFileSystem, WritableDeploymentStorage, AbstractBlock):
+class Sftp(WritableFileSystem, WritableDeploymentStorage):
     """
     Store data as a file on SFTP server.
 
